@@ -1,0 +1,40 @@
+.task-container {
+  min-height: 5vh;
+  width: 16vw;
+  margin: 1vh 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  border: 1px solid #dddddd;
+  background: white;
+  border-radius: 8px;
+  padding: 2vh 1.5vw;
+}
+
+.subtitle {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.pink {
+  background: #ffdce0;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin: 0.2rem 0;
+}
+
+.green {
+  background: #cbdfd8;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin: 0.2rem 0;
+}
+
+img {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 0.3rem;
+}
+
+
