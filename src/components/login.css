@@ -67,6 +67,32 @@
   box-shadow: 0 0px 2px 1px #8c73cb;
 }
 
+.popover-email {
+  position: absolute;
+  background-color: #fbec99;
+  color: red;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  bottom: calc(10% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.popover-pw {
+  position: absolute;
+  background-color: #fbec99;
+  color: red;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  bottom: calc(18% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @media screen and (max-width: 530px) {
   .heading {
     font-size: 1rem;

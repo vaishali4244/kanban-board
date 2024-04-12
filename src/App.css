@@ -1,4 +1,4 @@
-.main-container{
+.main-container {
   box-sizing: border-box;
   height: auto;
   width: 100%;
@@ -8,3 +8,11 @@
   align-items: center;
 }
 
+.nav-heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: #15053d;
+  height: 10vh;
+  width: 98.8vw;
+}

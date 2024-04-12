@@ -1,4 +1,4 @@
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DesignWeekly from "../components/designWeekly";
 import Personal from "../components/personal";
@@ -12,13 +12,13 @@ const Screen = () => {
 
     return (
         <div className="main-container">
-              <nav className="heading">
-            <Link to='/'>
-                <button className="login-btn" onClick={() => {
-                    dispatch(setLogin(false)); dispatch(setLogout())
-                }}>Logout</button>
-            </Link>
-                </nav>
+            <nav className="nav-heading">
+                <Link to='/'>
+                    <button className="login-btn" onClick={() => {
+                        dispatch(setLogin(false)); dispatch(setLogout())
+                    }}>Logout</button>
+                </Link>
+            </nav>
             <DesignWeekly />
             <Personal />
         </div>

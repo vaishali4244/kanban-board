@@ -9,7 +9,10 @@ const Task = (props) => {
         {props?.subtitle ?? "null"}
       </p>
       <div className='task-ul'>
-        <p className='task-li'>{props?.detail ?? "null"}</p>
+        <p className='task-li'> <img
+          src={require("../assets/images/Unchecked.png")}
+          alt="unchecked"
+        />{props?.detail ?? "null"}</p>
       </div>
     </div>
   )

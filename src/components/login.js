@@ -17,42 +17,45 @@ import './login.css';
 // });
 
 
-const Login = (props) => {
+const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorEmail, setErrorEmail] = useState("")
     const [errorPass, setErrorPass] = useState("")
     const [submit, setSubmit] = useState(false)
-    const navigate = useNavigate()
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const loginFunc = () => {
-        if (submit && errorEmail && errorPass) {
+        if (submit && !errorEmail && !errorPass) {
             navigate('/screen')
             dispatch(setLogin(true))
             dispatch(setUserEmail(email))
             dispatch(setUserPassword(password))
         }
+
     }
 
     useEffect(() => {
         if (submit) {
             loginFunc()
         }
-    },[submit])
+    }, [submit])
 
     useEffect(() => {
         setSubmit(false)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        setErrorEmail(emailRegex.test(email))
+        setErrorEmail(!emailRegex.test(email))
+        console.log(emailRegex.test(email))
     }, [email])
 
     useEffect(() => {
         setSubmit(false)
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-        setErrorPass(passwordRegex.test(password))
+        setErrorPass(!passwordRegex.test(password))
+        console.log("pw test", passwordRegex.test(password))
     }, [password])
 
 
@@ -61,18 +64,22 @@ const Login = (props) => {
             <header className="heading">
                 <h1>Kanban Board</h1>
             </header>
-        <div className="login">
+            <div className="login">
                 <h2>LOGIN HERE</h2>
-            <div className="details">
-                <label>User Name : </label>
-                <input type="text" placeholder="email" onChange={(e) => { setEmail(e?.target?.value) }} value={email} />
-                <br />
-                <label>Password : </label>
-                <input type="password" placeholder="password" onChange={(e) => { setPassword(e?.target?.value) }} value={password} />
-                <br />
-                <button className="login-btn" onClick={() => { loginFunc(); setSubmit(true) }}>Submit</button>
+                <div className="details">
+                    <label>Email: </label>
+                    <input type="text" placeholder="email" onChange={(e) => { setEmail(e?.target?.value) }} value={email} />
+                    {submit && errorEmail && <div className="popover-email">Please enter a valid email address.</div>}
+
+                    <br />
+                    <label>Password : </label>
+                    <input type="password" placeholder="password" onChange={(e) => { setPassword(e?.target?.value) }} value={password} />
+                    {submit && errorPass && <div className="popover-pw">Password must be at least 8 characters including a-z, A-Z and 0-9.</div>}
+
+                    <br />
+                    <button className="login-btn" onClick={() => { loginFunc(); setSubmit(true) }}>Submit</button>
+                </div>
             </div>
-        </div>
         </>
 
     )

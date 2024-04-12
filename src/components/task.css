@@ -37,4 +37,8 @@ img {
   margin-right: 0.3rem;
 }
 
-
+@media screen and (max-width: 900px) {
+  .task-container {
+    width: 90%;
+  }
+}

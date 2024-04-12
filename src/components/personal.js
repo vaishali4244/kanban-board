@@ -7,22 +7,18 @@ import Task from "./task";
 
 const Personal = () => {
   const data = useSelector(state => state?.user?.data)
-  // console.log("user data", data)
-
   const dispatch = useDispatch();
   const [addTitle, setAddTitle] = useState("");
   const [addDescription, setAddDescription] = useState("");
-  // console.log(addTitle,"addtitle")
-  // console.log("desp",addDescription)
+  const [searchQuery, setSearchQuery] = useState("");
 
 
   //function to add items in the present list
   const addItemFunc = (addTitle, addDescription) => {
     dispatch(setData([
-
       {
         subtitle: addTitle,
-        detail:addDescription,
+        detail: addDescription,
       }
     ]))
   };
@@ -36,6 +32,11 @@ const Personal = () => {
     }
   };
 
+  //function to show matched label
+  const filteredData = data?.filter((item) =>
+    item.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <section className="design-container">
       <h2 className="page-heading">Personal</h2>
@@ -47,20 +48,37 @@ const Personal = () => {
           <p className="topic next" style={{ background: "#E1E4E8" }}>
             Not started
           </p>
+          <div className="search-bar">
+
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button className="submit-btn" onClick={() => setSearchQuery("")}>Clear</button>
+          </div>
           <div className="task-container">
             <p className="subtitle">Take Coco to a vet</p>
             <p className="pink">Due 4/11</p>
           </div>
 
-            {data?.map((item, id) => {
-              return (
-                <Task
-                  id={id}
-                  subtitle={item?.subtitle}
-                  detail={item?.detail}
-                />
-              );
-            })}
+          {filteredData?.map((item, id) => {
+            return (
+              <Task key={id} id={id} subtitle={item?.subtitle} detail={item?.detail} />
+            );
+          })}
+
+          {/* {data?.map((item, id) => {
+            return (
+              <Task
+                id={id}
+                subtitle={item?.subtitle}
+                detail={item?.detail}
+              />
+            );
+          })} */}
 
           <div className="task-container">
             <h4>Add Task</h4>
@@ -73,26 +91,10 @@ const Personal = () => {
             <textarea placeholder="details"
               onChange={(e) => setAddDescription(e?.target?.value)}
               value={addDescription}
-             
+
             />
-          <button className="submit-btn" onClick={handleAddItem}>Submit</button>
+            <button className="submit-btn" onClick={handleAddItem}>Submit</button>
           </div>
-
-
-          {/* <button
-            onClick={() => {
-              dispatch(
-                setData([
-                  {
-                    subtitle: "hello world",
-                    detail: "will work ",
-                  },
-                ])
-              );
-            }}
-          >
-            Add new
-          </button> */}
         </div>
 
         <div className="week">
@@ -116,7 +118,7 @@ const Personal = () => {
             <p>
               <img
                 src={require("../assets/images/Unchecked.png")}
-                alt="checked"
+                alt="unchecked"
               />
               Cancel VAT ID
             </p>

@@ -76,11 +76,33 @@ p {
   margin: 2vh 1vw;
 }
 
+.search-bar {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 70%;
+  display: inline;
+  box-sizing: border-box;
+  padding: 4px;
+  margin: 0.2rem 1vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-bar > button {
+  padding: 3px 5px;
+}
+
 .addtask,
 textarea {
   width: 100%;
   box-sizing: border-box;
   padding: 6px;
+  margin: 0.2rem 0;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -92,4 +114,39 @@ textarea {
   font-size: 1rem;
   border-radius: 8px;
   margin: 0.8vh 0;
+}
+
+@media screen and (max-width: 900px) {
+  .design-content {
+    width: 90vw;
+    min-height: 50vh;
+    background: #f8f8f8;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 2vh 0;
+  }
+  .week {
+    width: 90%;
+  }
+  .week:nth-child(1) {
+    order: 4;
+  }
+}
+@media screen and (max-width: 550px) {
+  .design-content {
+    grid-template-columns: 1fr;
+  }
+
+  .week {
+    width: 95%;
+  }
+
+  .week:nth-child(1) {
+    order: 0;
+  }
+
+  .task-img {
+    width: 60vw;
+  }
 }
