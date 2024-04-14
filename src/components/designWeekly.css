@@ -3,6 +3,7 @@
   min-height: 70vh;
   width: 95vw;
   padding: 4vh 3vw;
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

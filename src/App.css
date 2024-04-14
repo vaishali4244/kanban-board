@@ -14,5 +14,11 @@
   justify-content: flex-end;
   background: #15053d;
   height: 10vh;
-  width: 98.8vw;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+}
+
+button{
+  cursor:pointer;
 }
