@@ -1,14 +1,12 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import DesignWeekly from "../components/designWeekly";
-import Personal from "../components/personal";
-import { setLogin, setLogout } from "../redux/reducer/userReducer";
+import { setLogin, setLogout } from "../redux/reducer/userReducer.tsx";
+import DesignWeekly from "../components/designWeekly.tsx";
+import Personal from "../components/personal.tsx";
 
 const Screen = () => {
     const dispatch = useDispatch()
-    // const user = useSelector(state => state.user)
-    // console.log("user", user)
-
 
     return (
         <div className="main-container">

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setData } from "../redux/reducer/userReducer";
+import { setData } from "../redux/reducer/userReducer.tsx";
 import "./designWeekly.css";
-import Task from "./task";
+import Task from "./task.tsx";
 
+
+type Tstate = {
+  state: unknown,
+  user: any
+}
 
 const Personal = () => {
-  const data = useSelector(state => state?.user?.data)
+  const data = useSelector((state: Tstate) => state?.user?.data);
   const dispatch = useDispatch();
   const [addTitle, setAddTitle] = useState("");
   const [addDescription, setAddDescription] = useState("");
@@ -15,15 +20,16 @@ const Personal = () => {
 
   //function to add items in the present list
   const addItemFunc = (addTitle, addDescription) => {
-    dispatch(setData([
-      {
-        subtitle: addTitle,
-        detail: addDescription,
-      }
-    ]))
+    dispatch(
+      setData([
+        {
+          subtitle: addTitle,
+          detail: addDescription,
+        },
+      ])
+    );
   };
 
-  // //function to add new items and clear the input fields
   const handleAddItem = () => {
     if (addTitle.trim() !== "" && addDescription.trim() !== "") {
       addItemFunc(addTitle, addDescription);
@@ -31,6 +37,13 @@ const Personal = () => {
       setAddDescription("");
     }
   };
+
+  // const handleDelete = (id) => {
+  //   const updatedData = data.filter((_, index) => index !== id);
+  //   dispatch(setData(updatedData));
+
+  // };
+
 
   //function to show matched label
   const filteredData = data?.filter((item) =>
@@ -49,7 +62,6 @@ const Personal = () => {
             Not started
           </p>
           <div className="search-bar">
-
             <input
               className="search-input"
               type="text"
@@ -57,7 +69,9 @@ const Personal = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="submit-btn" onClick={() => setSearchQuery("")}>Clear</button>
+            <button className="submit-btn" onClick={() => setSearchQuery("")}>
+              Clear
+            </button>
           </div>
           <div className="task-container">
             <p className="subtitle">Take Coco to a vet</p>
@@ -66,34 +80,33 @@ const Personal = () => {
 
           {filteredData?.map((item, id) => {
             return (
-              <Task key={id} id={id} subtitle={item?.subtitle} detail={item?.detail} />
-            );
-          })}
-
-          {/* {data?.map((item, id) => {
-            return (
               <Task
+                key={id}
                 id={id}
                 subtitle={item?.subtitle}
                 detail={item?.detail}
+              // onDelete={handleDelete}
               />
             );
-          })} */}
+          })}
 
           <div className="task-container">
             <h4>Add Task</h4>
-            <input className="addtask"
+            <input
+              className="addtask"
               type="text"
               placeholder="title"
               onChange={(e) => setAddTitle(e?.target?.value)}
               value={addTitle}
             />
-            <textarea placeholder="details"
+            <textarea
+              placeholder="details"
               onChange={(e) => setAddDescription(e?.target?.value)}
               value={addDescription}
-
             />
-            <button className="submit-btn" onClick={handleAddItem}>Submit</button>
+            <button className="submit-btn" onClick={handleAddItem}>
+              Submit
+            </button>
           </div>
         </div>
 

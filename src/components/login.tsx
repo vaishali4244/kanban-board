@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setLogin, setUserEmail, setUserPassword } from "../redux/reducer/userReducer";
+import { setLogin, setUserEmail, setUserPassword } from "../redux/reducer/userReducer.tsx";
 import './login.css';
+import React from "react";
 
 
 // import { persistStore } from 'redux-persist';
@@ -19,43 +20,46 @@ import './login.css';
 
 const Login = () => {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [errorEmail, setErrorEmail] = useState("")
-    const [errorPass, setErrorPass] = useState("")
-    const [submit, setSubmit] = useState(false)
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    const [errorEmail, setErrorEmail] = useState<boolean>(false)
+    const [errorPass, setErrorPass] = useState<boolean>(false)
+    const [submit, setSubmit] = useState<boolean>(false)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const loginFunc = () => {
-        if (submit && !errorEmail && !errorPass) {
-            navigate('/screen')
-            dispatch(setLogin(true))
-            dispatch(setUserEmail(email))
-            dispatch(setUserPassword(password))
-        }
 
-    }
 
     useEffect(() => {
-        if (submit) {
-            loginFunc()
+        const loginFunc = () => {
+            if (submit && !errorEmail && !errorPass) {
+                navigate('/screen')
+                dispatch(setLogin(true))
+                dispatch(setUserEmail(email))
+                dispatch(setUserPassword(password))
+            }
         }
-    }, [submit])
+        if (submit) {
+            loginFunc();
+            setSubmit(false);
+        } else {
+            setSubmit(false);
+        }
+    }, [submit, dispatch, email, errorPass, navigate, errorEmail, password])
 
     useEffect(() => {
         setSubmit(false)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setErrorEmail(!emailRegex.test(email))
-        console.log(emailRegex.test(email))
+        // console.log(emailRegex.test(email))
     }, [email])
 
     useEffect(() => {
         setSubmit(false)
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         setErrorPass(!passwordRegex.test(password))
-        console.log("pw test", passwordRegex.test(password))
+        // console.log("pw test", passwordRegex.test(password))
     }, [password])
 
 
@@ -77,7 +81,7 @@ const Login = () => {
                     {submit && errorPass && <div className="popover-pw">Password must be at least 8 characters including a-z, A-Z and 0-9.</div>}
 
                     <br />
-                    <button className="login-btn" onClick={() => { loginFunc(); setSubmit(true) }}>Submit</button>
+                    <button className="login-btn" onClick={() => setSubmit(true)}>Submit</button>
                 </div>
             </div>
         </>
