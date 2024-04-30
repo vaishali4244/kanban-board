@@ -111,10 +111,14 @@ textarea {
 .submit-btn {
   background: #ccc;
   border: none;
-  padding: 6px;
+  padding: 6px 10px;
   font-size: 1rem;
   border-radius: 8px;
   margin: 0.8vh 0;
+}
+
+.submit-btn:hover {
+  box-shadow: 0 0px 1px 1px #b8b6b6;
 }
 
 @media screen and (max-width: 900px) {

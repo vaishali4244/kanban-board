@@ -17,6 +17,22 @@
   font-size: 1.1rem;
 }
 
+.dlt-btn {
+  border: 1px solid #ac8ff6;
+  border-radius: 2px;
+  margin: 0.5rem 0.8rem;
+  background: #ac8ff6;
+  width: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.dlt-btn:hover {
+  box-shadow: 0 0px 2px 1px #8c73cb;
+}
+
 .pink {
   background: #ffdce0;
   padding: 4px 10px;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setData } from "../redux/reducer/userReducer.tsx";
+import { setData, setDelete } from "../redux/reducer/userReducer.tsx";
 import "./designWeekly.css";
 import Task from "./task.tsx";
 
@@ -38,11 +38,11 @@ const Personal = () => {
     }
   };
 
-  // const handleDelete = (id) => {
-  //   const updatedData = data.filter((_, index) => index !== id);
-  //   dispatch(setData(updatedData));
+  const handleDelete = (id) => {
+    const updatedData = data.filter((_, index) => index !== id);
+    dispatch(setDelete(updatedData));
 
-  // };
+  };
 
 
   //function to show matched label
@@ -81,11 +81,10 @@ const Personal = () => {
           {filteredData?.map((item, id) => {
             return (
               <Task
-                key={id}
                 id={id}
                 subtitle={item?.subtitle}
                 detail={item?.detail}
-              // onDelete={handleDelete}
+                onDelete={handleDelete}
               />
             );
           })}

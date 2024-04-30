@@ -1,16 +1,16 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogin, setUserEmail, setUserPassword } from "../redux/reducer/userReducer.tsx";
 import './login.css';
-import React from "react";
 
 
 // import { persistStore } from 'redux-persist';
-// import { store } from '../redux/store/store'; // Assuming your Redux store is defined in this file
+// import { store } from '../redux/store/store.tsx'; // Assuming your Redux store is defined in this file
 // const persistor = persistStore(store);
 
-// Clear storage
+
 // persistor.purge().then(() => {
 //   console.log('Storage cleared successfully');
 // }).catch((error) => {
@@ -42,11 +42,17 @@ const Login = () => {
         }
         if (submit) {
             loginFunc();
-            setSubmit(false);
-        } else {
-            setSubmit(false);
         }
     }, [submit, dispatch, email, errorPass, navigate, errorEmail, password])
+
+    useEffect(() => {
+        if (submit) {
+            const timer = setTimeout(() => {
+                setSubmit(false)
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [submit])
 
     useEffect(() => {
         setSubmit(false)
@@ -73,12 +79,12 @@ const Login = () => {
                 <div className="details">
                     <label>Email: </label>
                     <input type="text" placeholder="email" onChange={(e) => { setEmail(e?.target?.value) }} value={email} />
-                    {submit && errorEmail && <div className="popover-email">Please enter a valid email address.</div>}
+                    {email?.length !== 0 && submit && errorEmail && <div className="popover-email">Please enter a valid email address.</div>}
 
                     <br />
                     <label>Password : </label>
                     <input type="password" placeholder="password" onChange={(e) => { setPassword(e?.target?.value) }} value={password} />
-                    {submit && errorPass && <div className="popover-pw">Password must be at least 8 characters including a-z, A-Z and 0-9.</div>}
+                    {password?.length !== 0 && submit && errorPass && <div className="popover-pw">Password must be at least 8 characters including a-z, A-Z and 0-9.</div>}
 
                     <br />
                     <button className="login-btn" onClick={() => setSubmit(true)}>Submit</button>

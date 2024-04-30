@@ -5,24 +5,25 @@ interface TaskProps {
   id: number;
   subtitle: string;
   detail: string;
-  // onDelete: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-const Task = ({ id, subtitle, detail }: TaskProps) => {
+const Task = ({ id, subtitle, detail, onDelete }: TaskProps) => {
 
 
   return (
     <div key={id} className='task-container ' >
       <p className='subtitle'>
         {subtitle ?? "null"}
+        <button className='dlt-btn' onClick={() => onDelete(id)}>X</button>
       </p>
       <div className='task-ul'>
         <p className='task-li'> <img
           src={require("../assets/images/Unchecked.png")}
           alt="unchecked"
-        />{detail ?? "null"}</p>
+        />{detail ?? "null"}  </p>
       </div>
-      {/* <button onClick={()=>onDelete(id)}>Delete</button> */}
+
     </div>
   )
 }

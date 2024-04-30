@@ -41,6 +41,9 @@ export const userDetail = createSlice({
         setData: (state: TState, action: TAction) => {
             state.data = [...state?.data, ...action?.payload]
         },
+        setDelete: (state: TState, action: TAction) => {
+            state.data = action?.payload
+        },
         setLogout: (state: TState) => {
             state.user = {
                 email: "",
@@ -53,5 +56,5 @@ export const userDetail = createSlice({
 })
 
 
-export const { setUserEmail, setUserPassword, setLogin, setData, setLogout } = userDetail.actions;
+export const { setUserEmail, setUserPassword, setLogin, setData, setLogout,setDelete } = userDetail.actions;
 export default userDetail.reducer;

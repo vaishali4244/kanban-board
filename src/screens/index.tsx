@@ -17,8 +17,8 @@ const Screen = () => {
                     }}>Logout</button>
                 </Link>
             </nav>
-            <DesignWeekly />
             <Personal />
+            <DesignWeekly />
         </div>
     )
 }
